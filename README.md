@@ -11,4 +11,4 @@ To get started:
 * start the development server with `npm start`
 * open in browser the following urls:
     * Local: <http://localhost:3000/>
-    * On Your Network:  <http://192.168.56.1:3000/>
+    * On Your Network:  <http://LOCAL_NETWORK_IP:3000/>
