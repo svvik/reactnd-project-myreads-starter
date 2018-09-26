@@ -14,16 +14,20 @@ class Book extends Component {
     return (
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-            }}></div>
+            {
+              book.hasOwnProperty('imageLinks') ?
+                  (
+                      <div className="book-cover" style={{ backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                  ) :
+                  (
+                      <div className="book-cover book-cover-none"/>
+                  )
+            }
             <div className="book-shelf-changer">
-              <select defaultValue="1" onChange={(e) => this.props.onChange(e, book)}>
+              <select value={this.props.getBookShelf(book)} onChange={(e) => this.props.onChange(e, book)}>
                 <option value="move" disabled>Move to...</option>
                 {
-                  this.items.filter(item => item !== book.shelf).map((item) => (
+                  this.items.map((item) => (
                       <option value={item} key={item}>{this.map.get(item)}</option>
                   ))
                 }

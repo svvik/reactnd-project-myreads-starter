@@ -18,7 +18,10 @@ class BookShelf extends Component {
               {
                 this.props.books.filter(book => book.shelf === this.props.shelf).map((book) => (
                     <li key={book.id}>
-                      <Book book={book} onChange={(e, book) => this.props.updateBookAction(book, e.target.value)} />
+                      <Book book={book}
+                            onChange={(e, book) => this.props.updateBookAction(book, e.target.value)}
+                            getBookShelf = { (book) => book.shelf }
+                      />
                     </li>
                 ))
               }

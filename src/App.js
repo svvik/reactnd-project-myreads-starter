@@ -66,7 +66,8 @@ class BooksApp extends React.Component {
         )}/>
         <Route
             path='/search' render={() => (
-            <SearchBook onClose={this.onCloseSearch}
+            <SearchBook books={this.state.books}
+                        onClose={this.onCloseSearch}
                         onAddBook={this.onAddBook} />
         )}/>
       </div>

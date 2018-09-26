@@ -16,12 +16,11 @@ class SearchBook extends Component {
   }
 
   changeQuery(query) {
-    this.setState({query: query.trim()})
-    this.handleSearch()
+    this.setState({query})
+    this.handleSearch(query)
   }
 
-  handleSearch() {
-    let query = this.state.query;
+  handleSearch(query) {
     if (query.length === 0) {
       this.setState({books: []})
       return
@@ -37,6 +36,11 @@ class SearchBook extends Component {
     })
   }
 
+  getBookShelf = (book, bookdOnTheShelves) => {
+    let bookFromShelf = bookdOnTheShelves.find( bi => bi.id === book.id)
+    return bookFromShelf ? bookFromShelf.shelf : "none";
+  }
+
   render() {
     return (
         <div className="search-books">
@@ -50,7 +54,6 @@ class SearchBook extends Component {
                        onChange={(e) => this.changeQuery(e.target.value)}
                 />
               </form>
-
             </div>
           </div>
           <div className="search-books-results">
@@ -62,12 +65,12 @@ class SearchBook extends Component {
               {
                 this.state.books.map((book) => (
                     <li key={book.id}>
-                      <Book book={book} onChange={(e, book) => {
-                        console.log(book)
-                        console.log(book.categories)
-                        this.props.onAddBook(book, e.target.value)
-                        this.handleSearch()
-                      }} />
+                      <Book book={book}
+                            onChange={(e, book) => {
+                              this.props.onAddBook(book, e.target.value)
+                            }}
+                            getBookShelf = { (book) => this.getBookShelf(book, this.props.books) }
+                      />
                     </li>
                 ))
               }
